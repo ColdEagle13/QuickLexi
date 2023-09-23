@@ -40,40 +40,23 @@
             background-color: transparent;
             border: 2px solid var(--search-btn-color);
             color: var(--primary-color);
-            width: 90%;
         }
 
-        .search-btn {
+        .search-btn,
+        .feeling-lucky-btn {
             background-color: var(--search-btn-color);
             color: var(--background-color);
             border: 2px solid var(--search-btn-color);
-            padding: 10px 10px;
+            padding: 10px 20px;
             text-align: center;
             text-decoration: none;
             border-radius: 5px;
             transition-duration: 0.4s;
-            width: 90%;
         }
 
-        .search-btn:hover {
-            background-color: var(--search-btn-color);
-            color: var(--background-color);
-        }
-
-        .feeling-lucky-btn {
-            background-color: var(--feeling-lucky-btn-color);
-            color: var(--background-color);
-            border: 2px solid var(--feeling-lucky-btn-color);
-            padding: 10px 10px;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            transition-duration: 0.4s;
-            width: 90%;
-        }
-
+        .search-btn:hover,
         .feeling-lucky-btn:hover {
-            background-color: var(--feeling-lucky-btn-color);
+            background-color: var(--search-btn-color);
             color: var(--background-color);
         }
         h3{
@@ -84,17 +67,23 @@
 <body>
     <div class="container mt-5">
         <h1 class="font-primary">QuickLexi</h1>
-        <div class="form-group">
-            <input type="text" class="form-control" id="wordInput" placeholder="Enter a word"><br>
-            <button id="searchBtn" class="search-btn">Search</button><br><br>
-            <button id="discoverBtn" class="feeling-lucky-btn">Discover New Word</button>
+        <div class="row justify-content-center">
+            <div class="col-md-6 form-group">
+                <input type="text" class="form-control" id="wordInput" placeholder="Enter a word">
+            </div>
+            <div class="col-md-3 form-group">
+                <button id="searchBtn" class="search-btn">Search</button>
+            </div>
+            <div class="col-md-3 form-group">
+                <button id="discoverBtn" class="feeling-lucky-btn">Discover New Word</button>
+            </div>
         </div>
         <h3 class="font-primary" id="discoveredWord"></h3>
         <div id="result"></div>
     </div>
 
     <script>
-            document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
             const searchBtn = document.getElementById("searchBtn");
             const discoverBtn = document.getElementById("discoverBtn");
             const wordInput = document.getElementById("wordInput");
