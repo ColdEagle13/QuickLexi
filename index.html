@@ -94,7 +94,68 @@
     </div>
 
     <script>
-                
+            document.addEventListener("DOMContentLoaded", function () {
+            const searchBtn = document.getElementById("searchBtn");
+            const discoverBtn = document.getElementById("discoverBtn");
+            const wordInput = document.getElementById("wordInput");
+            const resultDiv = document.getElementById("result");
+            const discoveredWord = document.getElementById("discoveredWord");
+
+            const apiKey = "27db3ea9-18f6-47e8-8dfd-824cdda6b8b0"; // Replace with your actual API key
+
+            searchBtn.addEventListener("click", () => {
+                const word = wordInput.value.trim();
+                if (word !== "") {
+                    const apiUrl = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`;
+                    fetch(apiUrl)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            resultDiv.innerHTML = "";
+                            if (Array.isArray(data)) {
+                                data.forEach((entry) => {
+                                    if (entry.hwi && entry.hwi.prs) {
+                                        const pronunciation = entry.hwi.prs[0].sound.audio;
+                                        const audioUrl = `https://media.merriam-webster.com/soundc11/${pronunciation.charAt(0)}/${pronunciation}.wav`;
+                                        const audioElement = document.createElement("audio");
+                                        audioElement.src = audioUrl;
+                                        audioElement.controls = true;
+                                        resultDiv.appendChild(audioElement);
+                                    }
+                                    if (entry.shortdef) {
+                                        const definitions = entry.shortdef.join(", ");
+                                        resultDiv.insertAdjacentHTML("beforeend", `<p>${definitions}</p>`);
+                                    }
+                                });
+                            } else {
+                                resultDiv.innerHTML = "<p>No results found.</p>";
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            resultDiv.innerHTML = "<p>An error occurred while fetching data.</p>";
+                        });
+                }
+            });
+
+            discoverBtn.addEventListener("click", () => {
+                // Make a request to the Random Word API to get a random word
+                fetch("https://random-word-api.herokuapp.com/word?number=1")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data && Array.isArray(data) && data.length > 0) {
+                            const randomWord = data[0];
+                            wordInput.value = randomWord;
+                            discoveredWord.textContent = `Discovered Word: ${randomWord}`;
+                            searchBtn.click(); // Trigger a click event on the search button to fetch its definition
+                        } else {
+                            console.error("Error: Unable to fetch a random word.");
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    });
+            });
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
