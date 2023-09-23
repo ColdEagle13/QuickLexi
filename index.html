@@ -35,7 +35,13 @@
             margin: 20px 0;
         }
 
+        .form-inline {
+            display: flex;
+            align-items: center;
+        }
+
         input[type="text"] {
+            flex: 1;
             padding: 5px;
             margin-right: 10px;
             background-color: transparent;
@@ -74,7 +80,8 @@
             background-color: var(--feeling-lucky-btn-color);
             color: var(--background-color);
         }
-        h3{
+
+        h3 {
             font-family: 'Be Vietnam Pro', sans-serif;
         }
     </style>
@@ -83,8 +90,10 @@
     <div class="container mt-5">
         <h1 class="font-primary">QuickSnap Dictionary</h1>
         <div class="form-group">
-            <input type="text" class="form-control" id="wordInput" placeholder="Enter a word">
-            <button id="searchBtn" class="search-btn">Search</button>
+            <form class="form-inline">
+                <input type="text" class="form-control" id="wordInput" placeholder="Enter a word">
+                <button id="searchBtn" class="search-btn">Search</button>
+            </form>
             <button id="discoverBtn" class="feeling-lucky-btn">Discover New Word</button>
         </div>
         <h3 class="font-primary" id="discoveredWord"></h3>
@@ -92,7 +101,7 @@
     </div>
 
     <script>
-                document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
             const searchBtn = document.getElementById("searchBtn");
             const discoverBtn = document.getElementById("discoverBtn");
             const wordInput = document.getElementById("wordInput");
