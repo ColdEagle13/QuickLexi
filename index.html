@@ -140,7 +140,6 @@
             });
 
             discoverBtn.addEventListener("click", () => {
-                // Make a request to the Random Word API to get a random word
                 fetch("https://random-word-api.herokuapp.com/word?number=1")
                     .then((response) => response.json())
                     .then((data) => {
@@ -148,7 +147,7 @@
                             const randomWord = data[0];
                             wordInput.value = randomWord;
                             discoveredWord.textContent = `Discovered Word: ${randomWord}`;
-                            searchBtn.click(); // Trigger a click event on the search button to fetch its definition
+                            searchBtn.click(); 
                         } else {
                             console.error("Error: Unable to fetch a random word.");
                         }
