@@ -46,7 +46,10 @@
     <div class="container mt-5">
         <h1>Word Dictionary</h1>
         <div class="form-group">
-            <input type="text" class="form-control" id="wordInput" placeholder="Enter a word">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="wordInput" placeholder="Search for a word" aria-label="Search for a word" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+              </div>
         </div>
         <button class="btn btn-primary" id="searchBtn">Search</button>
         <button class="btn btn-secondary" id="discoverBtn">Discover New Word</button>
