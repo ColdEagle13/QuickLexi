@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/icon.png" sizes="26x26">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <title>QuickLexi</title>
+    <title>QuickSnap Dictionary</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Be+Vietnam+Pro&display=swap');
         :root {
@@ -35,13 +35,7 @@
             margin: 20px 0;
         }
 
-        .form-inline {
-            display: flex;
-            align-items: center;
-        }
-
         input[type="text"] {
-            flex: 1;
             padding: 5px;
             margin-right: 10px;
             background-color: transparent;
@@ -80,20 +74,17 @@
             background-color: var(--feeling-lucky-btn-color);
             color: var(--background-color);
         }
-
-        h3 {
+        h3{
             font-family: 'Be Vietnam Pro', sans-serif;
         }
     </style>
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="font-primary">QuickLexi</h1>
+        <h1 class="font-primary">QuickSnap Dictionary</h1>
         <div class="form-group">
-            <form class="form-inline">
-                <input type="text" class="form-control" id="wordInput" placeholder="Enter a word">
-                <button id="searchBtn" class="search-btn">Search</button>
-            </form>
+            <input type="text" class="form-control" id="wordInput" placeholder="Enter a word">
+            <button id="searchBtn" class="search-btn">Search</button>
             <button id="discoverBtn" class="feeling-lucky-btn">Discover New Word</button>
         </div>
         <h3 class="font-primary" id="discoveredWord"></h3>
@@ -101,68 +92,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const searchBtn = document.getElementById("searchBtn");
-            const discoverBtn = document.getElementById("discoverBtn");
-            const wordInput = document.getElementById("wordInput");
-            const resultDiv = document.getElementById("result");
-            const discoveredWord = document.getElementById("discoveredWord");
-
-            const apiKey = "27db3ea9-18f6-47e8-8dfd-824cdda6b8b0"; // Replace with your actual API key
-
-            searchBtn.addEventListener("click", () => {
-                const word = wordInput.value.trim();
-                if (word !== "") {
-                    const apiUrl = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`;
-                    fetch(apiUrl)
-                        .then((response) => response.json())
-                        .then((data) => {
-                            resultDiv.innerHTML = "";
-                            if (Array.isArray(data)) {
-                                data.forEach((entry) => {
-                                    if (entry.hwi && entry.hwi.prs) {
-                                        const pronunciation = entry.hwi.prs[0].sound.audio;
-                                        const audioUrl = `https://media.merriam-webster.com/soundc11/${pronunciation.charAt(0)}/${pronunciation}.wav`;
-                                        const audioElement = document.createElement("audio");
-                                        audioElement.src = audioUrl;
-                                        audioElement.controls = true;
-                                        resultDiv.appendChild(audioElement);
-                                    }
-                                    if (entry.shortdef) {
-                                        const definitions = entry.shortdef.join(", ");
-                                        resultDiv.insertAdjacentHTML("beforeend", `<p>${definitions}</p>`);
-                                    }
-                                });
-                            } else {
-                                resultDiv.innerHTML = "<p>No results found.</p>";
-                            }
-                        })
-                        .catch((error) => {
-                            console.error("Error:", error);
-                            resultDiv.innerHTML = "<p>An error occurred while fetching data.</p>";
-                        });
-                }
-            });
-
-            discoverBtn.addEventListener("click", () => {
-                // Make a request to the Random Word API to get a random word
-                fetch("https://random-word-api.herokuapp.com/word?number=1")
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data && Array.isArray(data) && data.length > 0) {
-                            const randomWord = data[0];
-                            wordInput.value = randomWord;
-                            discoveredWord.textContent = `Discovered Word: ${randomWord}`;
-                            searchBtn.click(); // Trigger a click event on the search button to fetch its definition
-                        } else {
-                            console.error("Error: Unable to fetch a random word.");
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Error:", error);
-                    });
-            });
-        });
+                
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
