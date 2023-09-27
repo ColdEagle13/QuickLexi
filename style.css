@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Be+Vietnam+Pro&display=swap');
+        :root {
+            --background-color: #222831;
+            --search-btn-color: #DCD6F7;
+            --feeling-lucky-btn-color: #A6B1E1;
+            --bold-font: 'Archivo Black', sans-serif;
+            --primary-color: #DCD6F7;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--primary-color);
+        }
+
+        .font-primary {
+            font-family: var(--bold-font);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-group {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        input[type="text"] {
+            padding: 10px 10px;
+            background-color: transparent;
+            border: 2px solid var(--search-btn-color);
+            color: var(--primary-color);
+        }
+
+        .search-btn,
+        .feeling-lucky-btn {
+            background-color: var(--search-btn-color);
+            color: var(--background-color);
+            border: 2px solid var(--search-btn-color);
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition-duration: 0.4s;
+            width: 90%;
+        }
+
+        .search-btn:hover,
+        .feeling-lucky-btn:hover {
+            background-color: var(--search-btn-color);
+            color: var(--background-color);
+        }
+        h3{
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        a{
+            text-decoration: none;
+        }
